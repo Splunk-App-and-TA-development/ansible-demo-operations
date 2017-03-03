@@ -27,6 +27,7 @@ These environment variables make it possible to reliably automate creation of AW
 - `ANSIBLE_TOWER_AMI`: The AMI used when creating the Tower EC2 instance
 - `ANSIBLE_TOWER_DB_PASSWORD`: The password to use when creating the Tower PostgreSQL DB
 - `ANSIBLE_TOWER_LICENSE_PATH`: Path on the Ansible control host to the license file for this Tower deployment
+  `ANSIBLE_DEMO_PROVISIONING_PASSWORD`: Temporary password used for provisioning use cases
 
 One approach is to create an `env.sh` file and source it before running.
 
@@ -43,6 +44,7 @@ export ANSIBLE_TOWER_ADMIN_PASSWORD="coffee"
 export ANSIBLE_TOWER_AMI="ami-2051294a"
 export ANSIBLE_TOWER_DB_PASSWORD="donuts"
 export ANSIBLE_TOWER_LICENSE_PATH="/path/to/ansible-demo-tower-license.json"
+export ANSIBLE_DEMO_PROVISIONING_PASSWORD="super-secret-password"
 ```
 
 **Note**: your available AZs might be different than, literally, A, B, and C.

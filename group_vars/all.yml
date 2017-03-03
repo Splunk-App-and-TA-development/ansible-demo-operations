@@ -16,3 +16,5 @@ ansible_rhv_server: "{{ lookup('env', 'ansible_rhv_server') }}"
 ansible_rhv_server_port: "{{ lookup('env', 'ansible_rhv_server_PORT') }}"
 ansible_rhv_user: "{{ lookup('env', 'ansible_rhv_user') }}"
 ansible_rhv_password: "{{ lookup('env', 'ansible_rhv_password') }}"
+
+ansible_demo_provisioning_password: "{{ lookup('env', 'ANSIBLE_DEMO_PROVISIONING_PASSWORD') }}"

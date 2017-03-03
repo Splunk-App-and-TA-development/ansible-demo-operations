@@ -48,6 +48,38 @@ sales_demo_job_templates:
         type: execute
       - name: Sales Demo Admin
         type: admin
+  - name: Windows - Provision Demo Instance
+    description: Launch a Windows instance in AWS
+    job_type: run
+    project: Ansible Examples
+    playbook: provisioning/aws/provision.yml
+    ask_inventory: yes
+    machine_credential: Demo Windows Provisioning Credential
+    cloud_credential: Demo Amazon Web Services
+    extra_vars:
+      aws_region: us-east-1
+      vpc_name: "{{ environment_name }}-tower-vpc"
+      aws_instances:
+        - count: 1
+          subnet_name: "{{ environment_name }}-tower-public-subnet-a"
+          keypair_name: "{{ demo_keypair_name }}"
+          platform: windows
+          virtualization_type: hvm
+          ami_name: Windows_Server-2012-R2_RTM-English-64Bit-Base-*
+          user_data: |
+            <powershell>
+            $admin = [adsi]("WinNT://./administrator, user")
+            $admin.PSBase.Invoke("SetPassword", "{{ ansible_password }}")
+            Invoke-Expression ((New-Object System.Net.Webclient).DownloadString('https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1'))
+            </powershell>
+          type: t2.micro
+          tags:
+            Demo: windows
+    team_roles:
+      - name: Sales Demo User
+        type: execute
+      - name: Sales Demo Admin
+        type: admin
   - name: LAMP HA Proxy - Provision Demo Instances
     description: Launch the LAMP HA Proxy Demo systems in AWS
     job_type: run
